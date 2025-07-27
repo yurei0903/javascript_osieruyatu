@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScriptのPromiseを学ぶ</title>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <header>
         <h1>JavaScriptのPromiseを学ぶ</h1>
         <nav>
             <ul>
+                <li><a href="#introduction">イントロダクション</a></li>
                 <li><a href="#introduction">イントロダクション</a></li>
                 <li><a href="#examples">サンプルコード</a></li>
                 <li><a href="#resources">参考資料</a></li>
@@ -21,16 +23,46 @@
     <main>
         <section id="introduction">
             <h2>Promiseとは</h2>
-            <p>ここにPromiseの概要を説明します。</p>
+            <p>PromiseとはJavaScriptで非同期処理を実行する際に非同期処理の状態を管理するために使うオブジェクトです。
+            Promiseは3つの状態をもちそれぞれ「pending（保留中）」「fulfilled（成功）」「rejected（失敗）」と呼ばれます。
+            Promiseを使うことで、非同期処理の結果を簡単に扱うことができます。</p>
+            </p>
+        </section>
+        <section id="program1"class="program">
+            <h3>例</h3>
+            <p>以下は1/2の確率で成功する簡単なプロミスプログラムです。
+            </p>
+            <button id="botan1">押してみてね</button>
+            <div class="code-toolbar"></div>
+            <pre><code>// Promiseの基本的な使い方
+            const myPromise = new Promise((resolve, reject) => { 
+            // 非同期処理をここに書く
+            setTimeout(() => {
+            const success = true; // 成功か失敗かを決める
+            if (success) {
+            resolve("成功しました！");
+            } else {
+            reject("失敗しました。");
+            }
+            }, 1000);
+            });
+            myPromise
+            .then(result => {
+                console.log(result); // 成功時の処理
+            })
+            .catch(error => {
+                console.error(error); // 失敗時の処理
+            });
+            
+            <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></code></pre>
         </section>
 
-        <section id="examples">
-            <h2>サンプルコード</h2>
-            <pre><code>// Promiseの基本例
-const promise = new Promise((resolve, reject) => {
-  // 非同期処理を実行
-});
-</code></pre>
+        <section id="setumei1">
+            <h2>Promiseとは</h2>
+            <p>PromiseとはJavaScriptで非同期処理を実行する際に非同期処理の状態を管理するために使うオブジェクトです。
+            Promiseは3つの状態をもちそれぞれ「pending（保留中）」「fulfilled（成功）」「rejected（失敗）」と呼ばれます。
+            Promiseを使うことで、非同期処理の結果を簡単に扱うことができます。</p>
+            </p>
         </section>
 
         <section id="resources">
@@ -44,6 +76,7 @@ const promise = new Promise((resolve, reject) => {
 
     <footer>
         <p>&copy; 2023 あなたの名前</p>
+        <script src="scripts.js"></script>
     </footer>
 </body>
 </html>

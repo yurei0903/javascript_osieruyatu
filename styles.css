@@ -68,3 +68,76 @@ footer {
         gap: 5px;
     }
 }
+/* 全体を収めるブロック */
+div.code-toolbar {
+    position: relative;
+}
+
+/* 整数済み部分 */
+pre {
+    position: relative;
+    padding: 1em 1em 1em 3.8em;
+    overflow: auto;
+    counter-reset: linenumber;
+    border-left: 1px solid hsla(256, 97%, 27%, 0.71);
+    font-size: 14px;
+    box-shadow: 0 0.5px 0.5px rgba(0,0,0,0.1), 0 0.5px 0.5px rgba(0,0,0,0.1);
+    border-top: .1px solid hsla(0, 0%, 84%, 0.1);
+    border-right: .1px solid hsla(0, 0%, 84%, 0.1);
+    background: #f5f2f0;
+    display: block;
+}
+
+/* ソースコード記入部分 */
+code {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+    position: relative;
+}
+
+/* 行数表示部分全体 */
+.line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 各行数表示 */
+.line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+}
+
+/* カウンター */
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: #999;
+    display: block;
+    padding-right: 0.8em;
+    text-align: right;
+}
