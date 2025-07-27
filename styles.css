@@ -141,3 +141,11 @@ code {
     padding-right: 0.8em;
     text-align: right;
 }
+
+.sikakukakomi {
+    background-color: rgb(249, 250, 232); /* 中の色をグレーに設定 */
+    border: 2px solid rgb(71, 71, 71); /* 黒いボーダーを設定 */
+    border-radius: 10px; /* 角を丸くする */
+    padding: 10px; /* 内側の余白を設定 */
+    margin: 10px 0; /* 上下の余白を設定 */
+}

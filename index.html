@@ -25,44 +25,77 @@
             <h2>Promiseとは</h2>
             <p>PromiseとはJavaScriptで非同期処理を実行する際に非同期処理の状態を管理するために使うオブジェクトです。
             Promiseは3つの状態をもちそれぞれ「pending（保留中）」「fulfilled（成功）」「rejected（失敗）」と呼ばれます。
-            Promiseを使うことで、非同期処理の結果を簡単に扱うことができます。</p>
+            Promiseを使うことで、非同期処理の結果を簡単に扱うことができます。<br>
+            このページではpromiseについて簡単に説明を行います。内容を分かりやすくするために一部内容を省略している部分があるので
+            さらに詳しいことを知りたい場合は参考資料を確認してください</p>
             </p>
+            
         </section>
         <section id="program1"class="program">
             <h3>例</h3>
-            <p>以下は1/2の確率で成功する簡単なプロミスプログラムです。
+            <p>以下は1/2の確率で成功する簡単なプロミスプログラムです。これ自体は非同期処理ではありませんが、Promiseの基本的な使い方を示しています。
             </p>
             <button id="botan1">押してみてね</button>
             <div class="code-toolbar"></div>
             <pre><code>// Promiseの基本的な使い方
-            const myPromise = new Promise((resolve, reject) => { 
-            // 非同期処理をここに書く
-            setTimeout(() => {
-            const success = true; // 成功か失敗かを決める
-            if (success) {
-            resolve("成功しました！");
-            } else {
-            reject("失敗しました。");
-            }
-            }, 1000);
-            });
-            myPromise
-            .then(result => {
-                console.log(result); // 成功時の処理
-            })
-            .catch(error => {
-                console.error(error); // 失敗時の処理
-            });
-            
+                const button = document.getElementById('botan1');
+                function randamu(){return new Promise((resolve, reject) => {
+                    // ここに非同期処理を記述)
+                
+                    setTimeout(() => {
+                        if (Math.random() < 0.50) {
+                            reject(new Error('失敗しました！'));
+                        } else {
+                            resolve('成功しました！');
+                        }
+                });       });}
+                // クリックイベントを追加
+                button.addEventListener('click', ()=> {
+                    randamu().then(result => {
+                        alert(result);// ここに処理が完了した後のコードを記述
+                    }).catch(error => {
+                        alert(error);// ここにエラーが発生した場合のコードを記述 console.error(error);にすると、コンソールにエラーが表示されます
+                    });
+                });
             <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></code></pre>
-        </section>
+        
+    </section>
 
         <section id="setumei1">
-            <h2>Promiseとは</h2>
-            <p>PromiseとはJavaScriptで非同期処理を実行する際に非同期処理の状態を管理するために使うオブジェクトです。
-            Promiseは3つの状態をもちそれぞれ「pending（保留中）」「fulfilled（成功）」「rejected（失敗）」と呼ばれます。
-            Promiseを使うことで、非同期処理の結果を簡単に扱うことができます。</p>
-            </p>
+            <h2>上のコードで使った関数・メソッド</h2>
+            <p>例でのコードで使った関数・メソッドを説明します。</p>
+            <div class="sikakukakomi">
+                <h3>resolve</h3> 
+                <ol>
+                    <li>Promiseの履行が完了を示す関数</li>
+                    <li>引数はPromiseで解決するときの引数</li>
+                    <li></li>
+                    
+                </ol>
+            </div>
+            <div class="sikakukakomi">
+                <h3>reject</h3> 
+                <ol>
+                    <li>Promiseの拒否を示す関数</li>
+                    <li>catchメソッドでエラーを受け取ることができます。</li>
+                </ol>
+            </div>
+            <div class="sikakukakomi">
+            <h3>then</h3> 
+            <ol>
+                <li>Promiseが解決した場合(resolveが行われた場合)に呼び出されるコールバック関数を登録します。</li>
+                <li>引数には成功時の結果を受け取ることができます。</li>
+                <li>戻り値では新しいPromiseを返します。このpromiseは待機状態です</li>
+            </ol>
+        </div>
+            <div class="sikakukakomi">
+                <h3>catch</h3> 
+                <ol>
+                    <li>Promiseが拒否された場合(rejectが行われた場合)に呼び出されるコールバック関数を登録します。</li>
+                    <li>引数にはエラーオブジェクトを受け取ることができます。</li>
+                    <li>戻り値では新しいPromiseを返します。このpromiseは待機状態です</li>
+                </ol>
+            </div>
         </section>
 
         <section id="resources">
