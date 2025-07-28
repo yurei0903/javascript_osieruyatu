@@ -9,12 +9,15 @@
 </head>
 <body>
     <header>
+        <img src="computer09_question.png" alt="ロゴ" class="logo">
         <h1>JavaScriptのPromiseを学ぶ</h1>
+        
         <nav>
             <ul>
                 <li><a href="#introduction">イントロダクション</a></li>
-                <li><a href="#introduction">イントロダクション</a></li>
-                <li><a href="#examples">サンプルコード</a></li>
+                <li><a href="#setumei1">メソッドの解説1</a></li>
+                <li><a href="#setumei2">promiseを使うメリット</a></li>
+                <li><a href="#matome">まとめ</a></li>
                 <li><a href="#resources">参考資料</a></li>
             </ul>
         </nav>
@@ -33,30 +36,30 @@
         </section>
         <section id="program1"class="program">
             <h3>例</h3>
-            <p>以下は1/2の確率で成功する簡単なプロミスプログラムです。これ自体は非同期処理ではありませんが、Promiseの基本的な使い方を示しています。
-            </p>
+            <p>以下は1/2の確率で成功する簡単なプロミスプログラムです。関数が実行されるのに1秒の遅延がありますが，非同期関数なので実行途中でも他の動作が可能になっています．
             <button id="botan1">押してみてね</button>
             <div class="code-toolbar"></div>
             <pre><code>// Promiseの基本的な使い方
-                const button = document.getElementById('botan1');
-                function randamu(){return new Promise((resolve, reject) => {
-                    // ここに非同期処理を記述)
+        const button = document.getElementById('botan1');
+        function randamu(){return new Promise((resolve, reject) => {
+        // ここに非同期処理を記述)
                 
-                    setTimeout(() => {
-                        if (Math.random() < 0.50) {
-                            reject(new Error('失敗しました！'));
-                        } else {
-                            resolve('成功しました！');
-                        }
-                });       });}
-                // クリックイベントを追加
-                button.addEventListener('click', ()=> {
-                    randamu().then(result => {
-                        alert(result);// ここに処理が完了した後のコードを記述
-                    }).catch(error => {
-                        alert(error);// ここにエラーが発生した場合のコードを記述 console.error(error);にすると、コンソールにエラーが表示されます
-                    });
-                });
+    setTimeout(() => {
+    if (Math.random() < 0.50) {
+        reject(new Error('失敗しました！'));
+    } else {
+        resolve('成功しました！');
+    }
+    });       });}
+    // クリックイベントを追加
+    button.addEventListener('click', ()=> {
+        randamu().then(result => {
+        alert(result);// ここに処理が完了した後のコードを記述
+        }).catch(error => {
+        alert(error);// ここにエラーが発生した場合のコードを記述 console.error(error);にすると、コンソールにエラーが表示されます
+},1000); // 1秒後に実行されるように設定
+alert('1秒以上たった後に消したら結果が表示されます');
+});
             <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></code></pre>
         
     </section>
@@ -69,7 +72,7 @@
                 <ol>
                     <li>Promiseの履行が完了を示す関数</li>
                     <li>引数はPromiseで解決するときの引数</li>
-                    <li></li>
+                    <li>戻り値は与えられた値で解決されたPromise</li>
                     
                 </ol>
             </div>
@@ -77,7 +80,8 @@
                 <h3>reject</h3> 
                 <ol>
                     <li>Promiseの拒否を示す関数</li>
-                    <li>catchメソッドでエラーを受け取ることができます。</li>
+                    <li>引数はエラーの理由</li>
+                    <li>戻り値は与えられた値で拒否されたPromise</li>
                 </ol>
             </div>
             <div class="sikakukakomi">
@@ -97,18 +101,82 @@
                 </ol>
             </div>
         </section>
-
+        <section id="setumei2">
+            <h2>promiseを使うといいこと</h2>
+            <p>Promiseを使うと以下のようなメリットがあります。</p>
+            <ul>
+                <li>非同期処理の結果を簡単に扱うことができる</li>
+                <li>非同期処理のエラーを簡単に扱うことができる</li>
+                <li>非同期処理の結果を連鎖的に処理することができる</li>
+                <li>非同期処理の状態を管理することができる</li>
+                <li>非同期処理の結果を同期的に扱うことができる</li>
+            </ul>
+        </section>
+        <section id="program2"class="program">
+            <h3>例</h3>
+            <p>以下は入力された数値を0～3秒ごとに3回倍にするプログラムです。</p>
+            <input 
+        type="text"
+        id="kakutoko"
+        name="kakutoko"
+        required
+        minlength="4"
+        maxlength="8"
+        size="10" />
+            <button id="botan2">入力できたらクリック</button>
+            <div id="hyojibasho"></div>
+            <pre><code>// Promiseの基本的な使い方その2
+    function bainisuru(data){return new Promise((resolve, reject) => {//値を倍にする関数
+        // ここに非同期処理を記述
+                
+        setTimeout(() => {
+                if(data === '') {
+            reject(new Error('入力が空です！'));
+        } else if(Number(data).isNaN) {
+            reject(new Error('数値じゃないです！'));
+                            
+        }
+    else{
+            resolve(data*2)
+        }
+    });       });}
+            button2.addEventListener('click', () => {
+            const inputData = data.value;
+            bainisuru(inputData).then(result => {
+        kakikomu.innerHTML=`入力値の2倍は: ${result}<br>`; // ここに1回目の処理が完了した後のコードを記述
+        return bainisuru(result); // さらにPromiseを返す
+    }).then(result => {
+        kakikomu.innerHTML+=`さらに2倍した結果は: ${result}<br>`; // ここに2回目の処理が完了した後のコードを記述
+        return bainisuru(result); // さらにPromiseを返す
+                
+    }).then(result =>{
+        kakikomu.innerHTML+=`最終的な結果は: ${result}<br>`; // ここに3回目の処理が完了した後のコードを記述
+    }).catch(error => {
+        alert(error); // ここにエラーが発生した場合のコードを記述 console.error(error);にすると、コンソールにエラーが表示されます
+    });
+});
+            <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></code></pre>
+        <p>このプログラムでは数値が入力されていると2倍した値が3回出力され，入力が空だったり，数値ではない場合，またはエラーの場合はchatchを用いてalertで示すことができる．
+            ちなみにこれをPromiseを使わずに書くとネストがかなり深くなる上にエラーの処理も難しくなります。</p>
+        
+    </section>
+    <img src="computer04_laugh.png" alt="ロゴ" class="logo"><h2 id="matome">まとめ</h2>
+    <p>promiseを用いると簡単に読みやすい形で非同期処理が可能になります．今回紹介したメソッド以外にもさまざまな
+        メソッドがあるのでぜひJavaScriptを書くときに調べてみてください．
+    </p>
         <section id="resources">
             <h2>参考資料</h2>
             <ul>
-                <li><a href="#">MDN Web Docs</a></li>
-                <li><a href="#">公式ドキュメント</a></li>
+                <li><a href="https://zenn.dev/peter_norio/articles/289927bab5a4d3">【イラスト付き】Promiseオブジェクト【丁寧に解説】</a></li>
+                <li><a href="https://www.tohoho-web.com/ex/promise.html#promise">とほほのPromise入門 - とほほのWWW入門</a></li>
+                <li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise - JavaScript | MDN</a></li>
             </ul>
         </section>
+        
     </main>
 
     <footer>
-        <p>&copy; 制作時間5時間</p>
+        <p>制作時間5時間</p>
         <script src="scripts.js"></script>
     </footer>
 </body>
